@@ -14,5 +14,5 @@ module Day1 =
     let CalcCaptcha (s:seq<int*int>) =
         s
         |> Seq.filter (fun (a,b) -> (a=b) )
-        |> Seq.map (fun (a,_) -> a)
+        |> Seq.map (fun (a,_) -> int64 a)
         |> Seq.sum

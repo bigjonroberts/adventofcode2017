@@ -31,12 +31,12 @@ let main argv =
             |> Seq.map (Char.GetNumericValue >> int)
             |> Seq.cache
         ints
-        |> Seq.pairwise
-        |> CalcCaptcha 
-        |> printfn "Solution part 1: %i"
-        ints
         |> Halfwise
         |> CalcCaptcha 
-        |> printfn "Solution part 2: %i"
+        |> printfn "Solution part 2: %A"
+        ints
+        |> Seq.pairwise
+        |> CalcCaptcha 
+        |> printfn "Solution part 1: %A"
         Console.ReadKey |> ignore
         0 // return an integer exit code
