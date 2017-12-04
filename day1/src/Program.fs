@@ -25,10 +25,18 @@ let main argv =
         printfn "Cannot find file: '%s'" argv.[0]
         2
     else
-        argv.[0]
-        |> inputChars 
-        |> Seq.map (Char.GetNumericValue >> int)
-        |> CalcCaptcha
-        |> Console.WriteLine
+        let ints =
+            argv.[0]
+            |> inputChars 
+            |> Seq.map (Char.GetNumericValue >> int)
+            |> Seq.cache
+        ints
+        |> Seq.pairwise
+        |> CalcCaptcha 
+        |> printfn "Solution part 1: %i"
+        ints
+        |> Halfwise
+        |> CalcCaptcha 
+        |> printfn "Solution part 2: %i"
         Console.ReadKey |> ignore
         0 // return an integer exit code
