@@ -9,11 +9,7 @@ let inputChars (filename:string) =
     seq {        
         use stream = new StreamReader(filename)
         while (stream.Peek() >= 0) do
-            yield stream.Read() |> char
-        use fcStream = new StreamReader(filename)
-        // Grab the first char for wraparound at end.
-        yield fcStream.Read() |> char            
-        
+            yield stream.Read() |> char        
     }
 
 [<EntryPoint>]
@@ -31,12 +27,15 @@ let main argv =
             |> Seq.map (Char.GetNumericValue >> int)
             |> Seq.cache
         ints
-        |> Halfwise
-        |> CalcCaptcha 
-        |> printfn "Solution part 2: %A"
-        ints
+        |> Seq.head
+        |> Seq.singleton
+        |> Seq.append ints 
         |> Seq.pairwise
         |> CalcCaptcha 
-        |> printfn "Solution part 1: %A"
+        |> printfn "Solution part 1: %i"
+        ints
+        |> Halfwise
+        |> CalcCaptcha 
+        |> printfn "Solution part 2: %i"
         Console.ReadKey |> ignore
         0 // return an integer exit code
