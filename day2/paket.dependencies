@@ -1,0 +1,7 @@
+source https://api.nuget.org/v3/index.json
+source https://www.myget.org/F/test-paket/api/v2
+
+nuget FSharp.Core
+nuget Microsoft.NET.Test.Sdk 15.3.0
+nuget xunit 2.2.0
+nuget xunit.runner.visualstudio 2.2.0
